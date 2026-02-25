@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const PRIORS_MARKER = '## Priors';
-const VERSION = '0.1.0';
+const VERSION = '0.1.1';
 
 // Resolve paths to bundled assets (works both locally and via npx)
 const PKG_ROOT = path.resolve(__dirname, '..');

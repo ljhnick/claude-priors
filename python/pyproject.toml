@@ -6,17 +6,19 @@ build-backend = "hatchling.build"
 name = "claude-priors"
 version = "0.1.0"
 description = "Persistent agent memory for AI coding assistants"
-readme = "../README.md"
+readme = "README.md"
 license = "MIT"
 requires-python = ">=3.8"
+authors = [{ name = "Jiahao Li" }]
 keywords = ["claude", "ai", "agent", "memory", "priors", "coding-assistant"]
+
+[project.urls]
+Homepage = "https://github.com/ljhnick/claude-priors"
+Repository = "https://github.com/ljhnick/claude-priors"
+Issues = "https://github.com/ljhnick/claude-priors/issues"
 
 [project.scripts]
 claude-priors = "claude_priors.cli:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["claude_priors"]
-
-[tool.hatch.build.targets.wheel.force-include]
-"../skill/SKILL.md" = "claude_priors/assets/SKILL.md"
-"../bootstrap/CLAUDE.md.snippet" = "claude_priors/assets/CLAUDE.md.snippet"

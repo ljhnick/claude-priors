@@ -1,6 +1,6 @@
 {
   "name": "claude-priors",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Persistent agent memory for AI coding assistants. One command to enable your agent to learn from every conversation.",
   "bin": {
     "claude-priors": "./bin/cli.js"
