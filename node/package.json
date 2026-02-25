@@ -16,11 +16,15 @@
     "cursor",
     "mcp"
   ],
-  "author": "",
+  "author": "Jiahao Li",
   "license": "MIT",
+  "homepage": "https://github.com/ljhnick/claude-priors#readme",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+https://github.com/ljhnick/claude-priors.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ljhnick/claude-priors/issues"
   },
   "files": [
     "bin/",

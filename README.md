@@ -45,7 +45,7 @@ claude-priors init
 ### Shell (curl)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/<org>/claude-priors/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/ljhnick/claude-priors/main/install.sh | sh
 ```
 
 ## What it does
