@@ -1,0 +1,8 @@
+
+## Priors
+
+This project uses agent priors (`.claude/priors/`) — persistent knowledge the agent accumulates across sessions.
+
+**Start of every task:** List `.claude/priors/` and read each file's YAML frontmatter (`topic`, `summary`). Load full content only for files relevant to the current task.
+
+**End of every conversation** where you were corrected, discovered something unexpected, or the user provided context you couldn't derive from code: load the `knowledge-extraction` skill from `.claude/skills/` and extract priors.
