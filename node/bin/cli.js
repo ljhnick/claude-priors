@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const PRIORS_MARKER = '## Priors';
-const VERSION = '0.1.1';
+const VERSION = '0.1.2';
 
 // Resolve paths to bundled assets (works both locally and via npx)
 const PKG_ROOT = path.resolve(__dirname, '..');
@@ -40,14 +40,12 @@ Usage:
   claude-priors help              Show this help
 
 Options:
-  --shared    Git-track priors (default: git-ignored)
   --global    Install skill to ~/.claude/skills/ instead of repo
   `);
 }
 
 function init(args) {
   const cwd = process.cwd();
-  const shared = args.includes('--shared');
   const global = args.includes('--global');
 
   console.log(`\nclaude-priors v${VERSION}`);
@@ -124,27 +122,6 @@ function init(args) {
   } else {
     fs.writeFileSync(instructionPath, bootstrapContent.trim() + '\n');
     console.log(`  Created ${instructionFile} with priors bootstrap`);
-  }
-
-  // 4. Handle .gitignore
-  const gitignorePath = path.join(cwd, '.gitignore');
-  const priorsGlob = '.claude/priors/';
-
-  if (!shared) {
-    if (fs.existsSync(gitignorePath)) {
-      const gitignore = fs.readFileSync(gitignorePath, 'utf8');
-      if (!gitignore.includes(priorsGlob)) {
-        fs.writeFileSync(gitignorePath, gitignore.trimEnd() + '\n\n# Agent priors (local knowledge)\n' + priorsGlob + '\n');
-        console.log('  Added .claude/priors/ to .gitignore');
-      } else {
-        console.log('  .gitignore already excludes priors');
-      }
-    } else {
-      fs.writeFileSync(gitignorePath, '# Agent priors (local knowledge)\n' + priorsGlob + '\n');
-      console.log('  Created .gitignore with priors exclusion');
-    }
-  } else {
-    console.log('  --shared: priors will be git-tracked');
   }
 
   console.log('\nDone! Your agent will now learn from every conversation.\n');
