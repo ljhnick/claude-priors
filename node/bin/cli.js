@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const PRIORS_MARKER = '## Priors';
-const VERSION = '0.1.2';
+const VERSION = '0.1.3';
 
 // Resolve paths to bundled assets (works both locally and via npx)
 const PKG_ROOT = path.resolve(__dirname, '..');
@@ -122,6 +122,21 @@ function init(args) {
   } else {
     fs.writeFileSync(instructionPath, bootstrapContent.trim() + '\n');
     console.log(`  Created ${instructionFile} with priors bootstrap`);
+  }
+
+  // 4. Clean up legacy .gitignore entry (older versions mistakenly added this)
+  const gitignorePath = path.join(cwd, '.gitignore');
+  if (fs.existsSync(gitignorePath)) {
+    const gitignore = fs.readFileSync(gitignorePath, 'utf8');
+    if (gitignore.includes('.claude/priors/')) {
+      const cleaned = gitignore
+        .replace(/\n?# Agent priors \(local knowledge\)\n\.claude\/priors\/\n?/g, '\n')
+        .replace(/\n?\.claude\/priors\/\n?/g, '\n')
+        .replace(/\n{3,}/g, '\n\n')
+        .trim() + '\n';
+      fs.writeFileSync(gitignorePath, cleaned);
+      console.log('  Removed .claude/priors/ from .gitignore (priors should be git-tracked)');
+    }
   }
 
   console.log('\nDone! Your agent will now learn from every conversation.\n');
